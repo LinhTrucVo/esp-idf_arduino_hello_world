@@ -1,0 +1,5 @@
+# Ignore build artifacts
+build/
+
+# Ignore managed components folder
+managed_components/
