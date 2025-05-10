@@ -33,7 +33,7 @@ This video show the progress of creating this project:
 https://www.youtube.com/watch?v=Zp-bnV0JAf8
 
 
-Additional information:
+## Additional information:
 1. Why "PRIV_REQUIRES spi_flash" cause the error Arduino.h file not found?
 GitHub Copilot:
 The PRIV_REQUIRES spi_flash line in your CMakeLists.txt specifies that the spi_flash component is a private dependency for your project. This means that only the current component can use the spi_flash library, and its include paths or other properties are not propagated to other components.
