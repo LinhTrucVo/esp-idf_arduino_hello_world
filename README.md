@@ -51,14 +51,14 @@ If arduino is not the correct component, you need to identify the component that
 GitHub Copilot
 Removing PRIV_REQUIRES spi_flash from your CMakeLists.txt might solve the fatal error: Arduino.h: No such file or directory issue because of how dependencies are managed in ESP-IDF's build system.
 Explanation:
-1.	Dependency Isolation with PRIV_REQUIRES:
+i.	Dependency Isolation with PRIV_REQUIRES:
 o	When you use PRIV_REQUIRES spi_flash, you are explicitly stating that your component only depends on spi_flash and no other components.
 o	This isolates your component from other dependencies, including the one that provides Arduino.h (likely the arduino component or a similar one).
 o	If Arduino.h is provided by another component, it won't be included in the build process because PRIV_REQUIRES restricts the scope of dependencies.
-2.	Removing PRIV_REQUIRES spi_flash:
+ii.	Removing PRIV_REQUIRES spi_flash:
 o	By removing PRIV_REQUIRES spi_flash, your component is no longer restricted to just the spi_flash dependency.
 o	This allows the build system to include other components (like arduino) that might be implicitly required by your code or the project.
-3.	Implicit Inclusion of arduino:
+iii.	Implicit Inclusion of arduino:
 o	If your project or environment is set up to include the arduino component by default, removing PRIV_REQUIRES spi_flash allows the build system to resolve and include arduino, which provides Arduino.h.
 Why This Works:
 •	The ESP-IDF build system automatically resolves dependencies based on the components used in your project. By restricting dependencies with PRIV_REQUIRES, you might unintentionally exclude necessary components.
