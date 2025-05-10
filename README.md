@@ -9,10 +9,13 @@ Starts a FreeRTOS task to print "Hello World".
 
 ## How to use example
 
-Follow detailed instructions provided specifically for this example.
+1. Clone this repo:
+**git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git**
 
-Select the instructions depending on Espressif chip installed on your development board:
+2. Update (clone) Arduino submodule:
+**git submodule update --init --recursive --depth 1**
 
+Other guideline from espressif
 - [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
 - [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
 
@@ -21,7 +24,7 @@ Select the instructions depending on Espressif chip installed on your developmen
 
 This is the modification of esp-idf hello_world example:
 The change:
-1. Add arduino as component
+1. Add Arduino as esp-idf's component (as git's submodule)
 2. Change the target from esp32 to esp32c3
 3. Enable USB CDC to Serial communication via USB on esp32c3
 4. Configure the esp32c3 built-in JTAG for flashing and debugging.
