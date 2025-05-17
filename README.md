@@ -27,7 +27,8 @@ The change:
 1. Add Arduino as esp-idf's component (as git's submodule)
 2. Change the target from esp32 to esp32c3
 3. Enable USB CDC to Serial communication via USB on esp32c3
-4. Configure the esp32c3 built-in JTAG for flashing and debugging.
+4. Configure the esp32c3 built-in JTAG for flashing and debugging
+5. Add .devcontainer\select_image_build_mode.sh to quickly select the way to build using Docker
 
 This video show the progress of creating this project:
 https://www.youtube.com/watch?v=Zp-bnV0JAf8

@@ -3,6 +3,7 @@
 
 void setup(){
   Serial.begin(115200);
+  pinMode(8, OUTPUT);
   while(!Serial){
     ; // wait for serial port to connect
   }
@@ -10,5 +11,6 @@ void setup(){
 
 void loop(){
     Serial.println("loop");
-    delay(1000);
+    digitalWrite(8, !digitalRead(8));
+    delay(100);
 }
