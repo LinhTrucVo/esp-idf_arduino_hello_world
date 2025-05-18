@@ -9,11 +9,15 @@ Starts a FreeRTOS task to print "Hello World".
 
 ## How to use example
 
-1. Clone this repo:
-**git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git**
+1. Clone this repo:<br>
+```
+git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
+```
 
-2. Update (clone) Arduino submodule:
-**git submodule update --init --recursive --depth 1**
+2. Update (clone) Arduino submodule:<br>
+```
+git submodule update --init --recursive --depth 1
+```
 
 Other guideline from espressif
 - [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
@@ -30,42 +34,72 @@ The change:
 4. Configure the esp32c3 built-in JTAG for flashing and debugging
 5. Add .devcontainer\select_image_build_mode.sh to quickly select the way to build using Docker
 
-This video show the progress of creating this project:
+This video show the progress of creating this project:<br>
 https://www.youtube.com/watch?v=Zp-bnV0JAf8
 
 
-## Additional information:
-1. Why "PRIV_REQUIRES spi_flash" cause the error Arduino.h file not found?
-GitHub Copilot:
-The PRIV_REQUIRES spi_flash line in your CMakeLists.txt specifies that the spi_flash component is a private dependency for your project. This means that only the current component can use the spi_flash library, and its include paths or other properties are not propagated to other components.
-If your code depends on Arduino.h, it likely requires the arduino component (or a similar component that provides Arduino.h). However, since PRIV_REQUIRES only includes spi_flash as a dependency, the arduino component is not included, and the compiler cannot find Arduino.h.
-Solution:
-You need to add the appropriate component that provides Arduino.h to your CMakeLists.txt. For example, if the arduino component provides Arduino.h, you can add it to the REQUIRES or PRIV_REQUIRES list.
-Updated CMakeLists.txt:
-PRIV_REQUIRES spi_flash arduino
-Explanation:
-•	Adding arduino ensures that its include paths and other properties are available to your project.
-•	Use REQUIRES instead of PRIV_REQUIRES if other components in your project also need access to arduino.
-If arduino is not the correct component, you need to identify the component that provides Arduino.h and include it in your dependencies.
+## Build using Docker:
+### For oiginal Docker file:<br>
 
-2. Why removing "PRIV_REQUIRES spi_flash" solve the error Arduino.h file not found?
-GitHub Copilot
-Removing PRIV_REQUIRES spi_flash from your CMakeLists.txt might solve the fatal error: Arduino.h: No such file or directory issue because of how dependencies are managed in ESP-IDF's build system.
-Explanation:
-i.	Dependency Isolation with PRIV_REQUIRES:
-o	When you use PRIV_REQUIRES spi_flash, you are explicitly stating that your component only depends on spi_flash and no other components.
-o	This isolates your component from other dependencies, including the one that provides Arduino.h (likely the arduino component or a similar one).
-o	If Arduino.h is provided by another component, it won't be included in the build process because PRIV_REQUIRES restricts the scope of dependencies.
-ii.	Removing PRIV_REQUIRES spi_flash:
-o	By removing PRIV_REQUIRES spi_flash, your component is no longer restricted to just the spi_flash dependency.
+Windows<br>
+```
+docker run --rm -v %cd%:/project -w /project -e HOME=/tmp espressif/idf idf.py build
+```
+Linux<br>
+```
+docker run --rm -v $PWD:/project -w /project -e HOME=/tmp espressif/idf idf.py build
+```
+
+### For customized Docker file:<br>
+**Build Docker** image first (build the image one time is enough), the image name is specified after the -t:
+```
+docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t 
+
+bico_esp_idf:latest_image_with_idf_v5.4.1 ./.devcontainer
+```
+
+**Build SW**:<br>
+Windows
+```
+docker run --rm -v %cd%:/project -w /project -e HOME=/tmp bico_esp_idf:latest_image_with_idf_v5.4.1 idf.py build
+```
+Linux
+```
+docker run --rm -v $PWD:/project -w /project -e HOME=/tmp bico_esp_idf:latest_image_with_idf_v5.4.1 idf.py build
+```
+
+## Additional information:
+1. Why "PRIV_REQUIRES spi_flash" cause the error Arduino.h file not found?<br><br>
+GitHub Copilot:<br>
+The PRIV_REQUIRES spi_flash line in your CMakeLists.txt specifies that the spi_flash component is a private dependency for your project. This means that only the current component can use the spi_flash library, and its include paths or other properties are not propagated to other components.<br>
+If your code depends on Arduino.h, it likely requires the arduino component (or a similar component that provides Arduino.h).<br>However, since PRIV_REQUIRES only includes spi_flash as a dependency, the arduino component is not included, and the compiler cannot find Arduino.h.<br>
+**Solution**:<br>
+You need to add the appropriate component that provides Arduino.h to your CMakeLists.txt. For example, if the arduino component provides Arduino.h, you can add it to the REQUIRES or PRIV_REQUIRES list.<br>
+Updated CMakeLists.txt:<br>
+PRIV_REQUIRES spi_flash arduino<br>
+Explanation:<br>
+•	Adding arduino ensures that its include paths and other properties are available to your project.<br>
+•	Use REQUIRES instead of PRIV_REQUIRES if other components in your project also need access to arduino.<br>
+If arduino is not the correct component, you need to identify the component that provides Arduino.h and include it in your dependencies.<br><br>
+
+2. Why removing "PRIV_REQUIRES spi_flash" solve the error Arduino.h file not found?<br><br>
+GitHub Copilot<br>
+Removing PRIV_REQUIRES spi_flash from your CMakeLists.txt might solve the fatal error: Arduino.h: No such file or directory issue because of how dependencies are managed in ESP-IDF's build system.<br>
+Explanation:<br>
+i.	Dependency Isolation with PRIV_REQUIRES:<br>
+o	When you use PRIV_REQUIRES spi_flash, you are explicitly stating that your component only depends on spi_flash and no other components.<br>
+o	This isolates your component from other dependencies, including the one that provides Arduino.h (likely the arduino component or a similar one).<br>
+o	If Arduino.h is provided by another component, it won't be included in the build process because PRIV_REQUIRES restricts the scope of dependencies.<br>
+ii.	Removing PRIV_REQUIRES spi_flash:<br>
+o	By removing PRIV_REQUIRES spi_flash, your component is no longer restricted to just the spi_flash dependency.<br>
 o	This allows the build system to include other components (like arduino) that might be implicitly required by your code or the project.
-iii.	Implicit Inclusion of arduino:
+iii.	Implicit Inclusion of arduino:<br>
 o	If your project or environment is set up to include the arduino component by default, removing PRIV_REQUIRES spi_flash allows the build system to resolve and include arduino, which provides Arduino.h.
-Why This Works:
-•	The ESP-IDF build system automatically resolves dependencies based on the components used in your project. By restricting dependencies with PRIV_REQUIRES, you might unintentionally exclude necessary components.
+Why This Works:<br>
+•	The ESP-IDF build system automatically resolves dependencies based on the components used in your project. By restricting dependencies with PRIV_REQUIRES, you might unintentionally exclude necessary components.<br>
 •	Removing PRIV_REQUIRES spi_flash allows the build system to include all required components, including the one that provides Arduino.h.
-Recommendation:
-If you need both spi_flash and arduino, explicitly include both in your CMakeLists.txt:
-REQUIRES spi_flash arduino
+Recommendation:<br>
+If you need both spi_flash and arduino, explicitly include both in your CMakeLists.txt:<br>
+REQUIRES spi_flash arduino<br>
 This ensures that both components are available without restricting dependencies.
 
