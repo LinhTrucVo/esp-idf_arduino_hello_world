@@ -18,6 +18,18 @@ git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
 ```
 git submodule update --init --recursive --depth 1
 ```
+To check out the Aduino submodule latest commit (optionals)
+```
+cd ./components/arduino
+git fetch origin master --depth 1
+git checkout origin/master
+```
+Now the submodule is detached (commit is updated but not yet be added to git cache to track),<br>
+To add the new submodule commit to git cache for tracking, <br>
+Back to the main repo then "add" and "commit" again,<br>
+From now on, every time executing the command to update submodule, <br>
+the commit we have just updated will be used instead of the commit at the time creating submodule.<br>
+
 
 Other guideline from espressif
 - [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
