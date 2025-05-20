@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "1. Using original devcontainer file"
-echo "2. Using customized devcontainer file"
+echo "1. Using original files"
+echo "2. Using customized file"
 read -p "Enter your choice (1 or 2): " choice
 
 # Delete Dockerfile and devcontainer.json if they exist in the current folder
