@@ -7,6 +7,19 @@ Starts a FreeRTOS task to print "Hello World".
 
 (See the README.md file in the upper level 'examples' directory for more information about examples.)
 
+## Example folder contents
+
+This is the modification of esp-idf hello_world example:
+The change:
+1. Add Arduino as esp-idf's component (as git's submodule)
+2. Change the target from esp32 to esp32c3
+3. Enable USB CDC to Serial communication via USB on esp32c3
+4. Configure the esp32c3 built-in JTAG for flashing and debugging
+5. Add .devcontainer\select_image_build_mode.sh to quickly select the way to build using Docker
+
+This video show the progress of creating this project:<br>
+https://www.youtube.com/watch?v=Zp-bnV0JAf8
+
 ## How to use example
 
 1. Clone this repo:<br>
@@ -36,20 +49,6 @@ Other guideline from espressif
 - [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
 
 
-## Example folder contents
-
-This is the modification of esp-idf hello_world example:
-The change:
-1. Add Arduino as esp-idf's component (as git's submodule)
-2. Change the target from esp32 to esp32c3
-3. Enable USB CDC to Serial communication via USB on esp32c3
-4. Configure the esp32c3 built-in JTAG for flashing and debugging
-5. Add .devcontainer\select_image_build_mode.sh to quickly select the way to build using Docker
-
-This video show the progress of creating this project:<br>
-https://www.youtube.com/watch?v=Zp-bnV0JAf8
-
-
 ## Build using Docker:
 ### For oiginal Docker file:<br>
 
@@ -65,9 +64,7 @@ docker run --rm -v $PWD:/project -w /project -e HOME=/tmp espressif/idf idf.py b
 ### For customized Docker file:<br>
 **Build Docker** image first (build the image one time is enough), the image name is specified after the -t:
 ```
-docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t 
-
-bico_esp_idf:latest_image_with_idf_v5.4.1 ./.devcontainer
+docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t bico_esp_idf:latest_image_with_idf_v5.4.1 ./.devcontainer
 ```
 
 **Build SW**:<br>

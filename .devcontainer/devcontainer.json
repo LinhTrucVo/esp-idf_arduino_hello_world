@@ -1,7 +1,13 @@
 {
 	"name": "ESP-IDF QEMU",
+
+	"initializeCommand": "curl -o ${localWorkspaceFolder}/.devcontainer/Dockerfile https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/Dockerfile && curl -o ${localWorkspaceFolder}/.devcontainer/entrypoint.sh https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/entrypoint.sh",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"image": "bico_esp_idf:latest_image_with_idf_v5.4.1",
+		"args": {
+		"IDF_CLONE_BRANCH_OR_TAG": "v5.4.1"
+		}
 	},
 	"customizations": {
 		"vscode": {

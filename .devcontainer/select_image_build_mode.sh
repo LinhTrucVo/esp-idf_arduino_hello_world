@@ -13,6 +13,8 @@ if [ "$choice" == "1" ]; then
     echo "Original devcontainer files copied."
 elif [ "$choice" == "2" ]; then
     cp ./template/devcontainer_customized.json ./devcontainer.json
+    curl -o $PWD/Dockerfile https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/Dockerfile
+    curl -o $PWD/entrypoint.sh https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/entrypoint.sh
     echo "Customized devcontainer file copied."
 else
     echo "Invalid choice."
