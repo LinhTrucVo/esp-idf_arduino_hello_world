@@ -5,7 +5,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-		"IDF_CLONE_BRANCH_OR_TAG": "v5.4.1"
+			"IDF_CLONE_BRANCH_OR_TAG": "v5.4.1"
 		},
 		"options": [
 			"--tag", "bico_esp_idf:latest_image_idf_v5.4.1"
