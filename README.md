@@ -15,7 +15,7 @@ The changes are:
 2. Change the target from esp32 to esp32c3
 3. Enable USB CDC to Serial communication via USB on esp32c3
 4. Configure the esp32c3 built-in JTAG for flashing and debugging
-5. Add .devcontainer\select_image_build_mode.sh to quickly select the way to build using Docker
+5. Add .devcontainer\select_image_build_option.sh file to quickly select the way to build using Docker
 
 This video show the progress of creating this project:<br>
 https://www.youtube.com/watch?v=Zp-bnV0JAf8
@@ -51,36 +51,44 @@ Other guideline from espressif
 
 ## Build using Docker:
 
-This repo provides 2 mode to build the Docker Image, run the **select_image_build_mode.sh** file to select the coresponding mode.
-1. Using the **original** devcontainer and Docker files (original files from the espressif hello_world example)
-2. Using the **customized** devcontainer and Docker files
+This repo provides 2 option to build the Docker Image, run the **select_image_build_option.sh** file to select the coresponding option.
+1. Using the image with **latest** esp-idf version
+2. Using the image with **specific** esp-idf version
+<br>
 
+After select the option, follow the following steps:
 
-### If using oiginal file mode:<br>
-
-Windows<br>
-```
-docker run --rm -v %cd%:/project -w /project -e HOME=/tmp espressif/idf idf.py build
-```
-Linux<br>
-```
-docker run --rm -v $PWD:/project -w /project -e HOME=/tmp espressif/idf idf.py build
-```
-
-### If using customized file mode:<br>
+### If using latest version:<br>
 **Build Docker** image first (build the image one time is enough), the image name is specified after the -t:
 ```
-docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t bico_esp_idf:latest_image_with_idf_v5.4.1 ./.devcontainer
+docker build -t esp_idf:latest ./.devcontainer
 ```
 
 **Build SW**:<br>
 Windows
 ```
-docker run --rm -v %cd%:/project -w /project -e HOME=/tmp bico_esp_idf:latest_image_with_idf_v5.4.1 idf.py build
+docker run --rm -v %cd%:/project -w /project -e HOME=/tmp esp_idf:latest idf.py build
 ```
 Linux
 ```
-docker run --rm -v $PWD:/project -w /project -e HOME=/tmp bico_esp_idf:latest_image_with_idf_v5.4.1 idf.py build
+docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:latest idf.py build
+```
+
+
+### If using specific:<br>
+**Build Docker** image first (build the image one time is enough), the image name is specified after the -t:
+```
+docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t esp_idf:v5.4.1 ./.devcontainer
+```
+
+**Build SW**:<br>
+Windows
+```
+docker run --rm -v %cd%:/project -w /project -e HOME=/tmp esp_idf:v5.4.1 idf.py build
+```
+Linux
+```
+docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:v5.4.1 idf.py build
 ```
 
 ## Additional information:
