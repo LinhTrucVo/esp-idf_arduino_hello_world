@@ -75,7 +75,7 @@ docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:latest idf.py 
 ```
 
 
-### If using specific:<br>
+### If using specific version:<br>
 **Build Docker** image first (build the image one time is enough), the image name is specified after the -t:
 ```
 docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t esp_idf:v5.4.1 ./.devcontainer
