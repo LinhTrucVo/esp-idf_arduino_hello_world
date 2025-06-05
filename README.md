@@ -27,7 +27,12 @@ https://www.youtube.com/watch?v=Zp-bnV0JAf8
 git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
 ```
 
-2. Update (clone) Arduino submodule:<br>
+2. Enter the repo:<br>
+```
+cd esp-idf_arduino_hello_world
+```
+
+3. Update (clone) Arduino submodule:<br>
 ```
 git submodule update --init --recursive --depth 1
 ```
