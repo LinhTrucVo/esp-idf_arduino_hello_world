@@ -96,7 +96,7 @@ Linux
 docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:v5.4.1 idf.py build
 ```
 
-<br>Copy this to git bash to perform the steps from Repo Cloning to build and open project with VSCode
+<br>Copy this to git bash to perform the steps from Repo Cloning to build:
 ```
 # Clone this repo:
 git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
@@ -121,9 +121,6 @@ docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t esp_idf:v5.4.1 ./.dev
 
 # Build the project inside the Docker container:
 MSYS_NO_PATHCONV=1 docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:v5.4.1 idf.py build
-
-# Open the project in VS Code:
-code .
 ```
 
 ## Additional information:
