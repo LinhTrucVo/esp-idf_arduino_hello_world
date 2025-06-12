@@ -4,7 +4,13 @@ echo Selecting option to build docker image.
 echo "1. Using image with latest esp-idf version"
 echo "2. Using image with specific esp-idf version"
 echo
-read -p "Enter your choice (1 or 2): " choice
+
+if [ -n "$1" ]; then
+    choice="$1"
+    echo "Choice provided as argument: $choice"
+else
+    read -p "Enter your choice (1 or 2): " choice
+fi
 
 # Delete Dockerfile and devcontainer.json if they exist in the current folder
 rm -f ./Dockerfile ./devcontainer.json ./entrypoint.sh

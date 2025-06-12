@@ -96,6 +96,36 @@ Linux
 docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:v5.4.1 idf.py build
 ```
 
+<br>Copy this to git bash to perform the steps from Repo Cloning to build and open project with VSCode
+```
+# Clone this repo:
+git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
+
+# Enter the repo directory:
+cd esp-idf_arduino_hello_world
+
+# Initialize and update submodules:
+git submodule update --init --recursive --depth 1
+
+# Go to the .devcontainer directory:
+cd ./.devcontainer
+
+# Select Docker image build option (2 = specific esp-idf version):
+./select_image_build_option.sh 2
+
+# Back to the parent directory
+cd ..
+
+# Build the Docker image with a specific esp-idf version:
+docker build --build-arg IDF_CLONE_BRANCH_OR_TAG=v5.4.1 -t esp_idf:v5.4.1 ./.devcontainer
+
+# Build the project inside the Docker container:
+MSYS_NO_PATHCONV=1 docker run --rm -v $PWD:/project -w /project -e HOME=/tmp esp_idf:v5.4.1 idf.py build
+
+# Open the project in VS Code:
+code .
+```
+
 ## Additional information:
 1. Why "PRIV_REQUIRES spi_flash" cause the error Arduino.h file not found?<br><br>
 GitHub Copilot:<br>
