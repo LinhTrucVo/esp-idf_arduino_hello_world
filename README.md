@@ -48,7 +48,6 @@ git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
 cd esp-idf_arduino_hello_world
 git submodule update --init --recursive --depth 1
 python .\script\target_setup\select_and_setting_target.py esp32
-code .
 
 ```
 
