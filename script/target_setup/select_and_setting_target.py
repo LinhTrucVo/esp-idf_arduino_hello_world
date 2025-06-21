@@ -35,6 +35,9 @@ data = None
 with open(setting_json_path, 'r') as file:
     data = json.load(file)
 
+# Load ESP-IDF path from settings.json
+idf_path = data.get('idf.espIdfPathWin')
+
 # Update idf.openOcdConfigs according to selected target
 if target == "esp32c3":
     data["idf.openOcdConfigs"] = ["board/esp32c3-builtin.cfg"]
@@ -45,13 +48,10 @@ elif target == "esp32":
 with open(setting_json_path, 'w', encoding='utf-8') as file:
     json.dump(data, file, indent=2)
 
-# Load ESP-IDF path from settings.json
-idf_path = data.get('idf.espIdfPathWin')
-
 # Prepare batch file path for the selected target
-cmd_file = target + ".bat"
+bat_file_name = target + ".bat"
 bat_dir = os.path.join(current_dir, target)
-bat_file = os.path.join(bat_dir, cmd_file)
+bat_file_path = os.path.join(bat_dir, bat_file_name)
 
 # Copy CMakeLists.txt and sdkconfig.defaults from target folder to project root
 root_dir = os.path.abspath(os.path.join(current_dir, '../..'))
@@ -78,8 +78,8 @@ idf.py flash monitor
 """
 
 # Write the batch file
-with open(bat_file, "w", encoding="utf-8") as f:
+with open(bat_file_path, "w", encoding="utf-8") as f:
     f.write(cmd)
 
 # Run the batch file
-subprocess.run([bat_file], shell=True)
+subprocess.run([bat_file_path], shell=True)
