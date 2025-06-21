@@ -36,11 +36,30 @@ cd esp-idf_arduino_hello_world
 ```
 git submodule update --init --recursive --depth 1
 ```
+
+4. Select target (esp32 | esp32c3), build, flash and monitor seial output
+```
+python .\script\target_setup\select_and_setting_target.py esp32
+```
+
+## All in one (clone, build, flash, monitor)
+```
+git clone https://github.com/LinhTrucVo/esp-idf_arduino_hello_world.git
+cd esp-idf_arduino_hello_world
+git submodule update --init --recursive --depth 1
+python .\script\target_setup\select_and_setting_target.py esp32
+code .
+```
+
 To check out the Aduino submodule latest commit (optionals)
 ```
 cd ./components/arduino
 git fetch origin master --depth 1
 git checkout origin/master
+
+cd ../..
+git add .
+git commit -m "Update arduino submodule"
 ```
 Now the submodule is detached (commit is updated but not yet be added to git cache to track),<br>
 To add the new submodule commit to git cache for tracking, <br>
