@@ -74,7 +74,7 @@ call "{idf_path}\\export.bat"
 idf.py set-target {target}
 idf.py fullclean
 idf.py build
-idf.py flash monitor
+idf.py flash
 """
 
 # Write the batch file
