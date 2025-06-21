@@ -149,6 +149,7 @@ cd esp-idf_arduino_hello_world
 git submodule update --init --recursive --depth 1
 python .\script\target_setup\select_and_setting_target.py esp32
 python .\script\esp32_cyd_tft_touch_screen\setup_cyd_lvgl.py
+
 ```
 
 ## Additional information:
