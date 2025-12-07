@@ -15,7 +15,7 @@ The changes are:
 2. Change the target from esp32 to esp32c3
 3. Enable USB CDC to Serial communication via USB on esp32c3
 4. Configure the esp32c3 built-in JTAG for flashing and debugging
-5. Add .devcontainer\select_image_build_option.sh file to quickly select the way to build using Docker
+5. Add .devcontainer\select_idf_version.sh.sh file to quickly select the way to build using Docker
 
 This video show the progress of creating this project:<br>
 https://www.youtube.com/watch?v=Zp-bnV0JAf8
@@ -75,7 +75,7 @@ Other guideline from espressif
 
 ## Build using Docker:
 
-This repo provides 2 option to build the Docker Image, run the **select_image_build_option.sh** file to select the coresponding option.
+This repo provides 2 option to build the Docker Image, run the **select_idf_version.sh.sh** file to select the coresponding option.
 1. Using the image with **latest** esp-idf version
 2. Using the image with **specific** esp-idf version
 <br>
@@ -130,7 +130,7 @@ git submodule update --init --recursive --depth 1
 cd ./.devcontainer
 
 # Select Docker image build option (2 = specific esp-idf version):
-./select_image_build_option.sh 2
+./select_idf_version.sh.sh 2
 
 # Back to the parent directory
 cd ..

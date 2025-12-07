@@ -1,0 +1,9 @@
+{
+  // "C_Cpp.intelliSenseEngine": "default",
+  // "idf.espIdfPathWin": "C:\\Users\\bico\\esp\\v5.4.1\\esp-idf",
+  // "idf.toolsPathWin": "C:\\Users\\bico\\.espressif",
+  // "idf.pythonInstallPath": "C:\\Users\\bico\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.openOcdConfigs": [
+    "board/esp32c3-builtin.cfg"
+  ]
+}
