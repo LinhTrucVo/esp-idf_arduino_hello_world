@@ -1,6 +1,6 @@
 {
 	"name": "ESP-IDF QEMU",
-	"initializeCommand": "curl -o ${localWorkspaceFolder}/.devcontainer/Dockerfile https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/Dockerfile && curl -o ${localWorkspaceFolder}/.devcontainer/entrypoint.sh https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/entrypoint.sh",
+	// "initializeCommand": "curl -o ${localWorkspaceFolder}/.devcontainer/Dockerfile https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/Dockerfile && curl -o ${localWorkspaceFolder}/.devcontainer/entrypoint.sh https://raw.githubusercontent.com/espressif/esp-idf/master/tools/docker/entrypoint.sh",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
@@ -24,5 +24,10 @@
 			]
 		}
 	},
-	"runArgs": ["--privileged"]
+	// Container runtime configuration
+	"runArgs": [
+		"--name", "esp-idf_arduino_hello_world",
+		"--privileged",
+		// "--network", "host",
+	],
 }
